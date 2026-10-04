@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/jpeg" href="unnamed.jpg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AION 2 — General Launch Checklist</title>
+<style>
+:root{
+  --bg:#0b1020; --panel:#121a2d; --panel2:#18223a; --text:#edf2ff;
+  --muted:#9eabc7; --accent:#7c9cff; --green:#39d98a; --yellow:#ffd166;
+  --red:#ff6b7a; --orange:#ff9f43; --border:#293654;
+}
+body.light{
+  --bg:#f4f6fb; --panel:#ffffff; --panel2:#eef2f9; --text:#182033;
+  --muted:#5f6b82; --accent:#4f6fe8; --green:#159b61; --yellow:#b37b00;
+  --red:#c9364a; --orange:#c96d16; --border:#d6ddeb;
+}
+body.light header{background:rgba(255,255,255,.96)}
+body.light .progress{background:#dfe5f0}
+body.light li.item:hover{background:#f0f3f9}
+body.light .warning{background:#fff0f2}
+body.light .tip{background:#eaf8f1}
+body.light .priority{background:#fff8df}
+html[dir="rtl"] body{font-family:Tahoma,Arial,sans-serif}
+html[dir="rtl"] .header-title-block{direction:rtl;text-align:right}
+html[dir="ltr"] .header-title-block{direction:ltr;text-align:left}
+.header-controls{direction:ltr !important;flex-direction:row !important}
+.main-header-row{direction:ltr !important}
+
+html[dir="rtl"] .progress-top{direction:rtl}
+html[dir="rtl"] .item{direction:rtl}
+html[dir="rtl"] .item input{margin-left:0;margin-right:0}
+html[dir="rtl"] .small{direction:rtl}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.45}
+header{position:sticky;top:0;z-index:20;background:rgba(11,16,32,.96);backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:16px 24px}
+h1{margin:0;font-size:25px}.subtitle{color:var(--muted);margin-top:4px}
+.container{max-width:1450px;margin:auto;padding:20px}
+.progress-wrap{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:18px}
+.progress-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.progress{height:10px;background:#26304a;border-radius:20px;overflow:hidden;margin-top:10px}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--green));transition:.2s}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.header-controls{justify-content:flex-end;direction:ltr!important}
+button{border:1px solid var(--border);background:var(--panel2);color:var(--text);padding:8px 12px;
+border-radius:8px;cursor:pointer}button:hover{filter:brightness(1.15)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(390px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:18px;color:var(--text)}
+.card.full{grid-column:1/-1}
+.card h2{margin:0 0 5px;font-size:20px;color:var(--text)}
+.card h3{margin:18px 0 7px;font-size:15px;color:var(--text)}
+.badge{display:inline-block;font-size:11px;padding:3px 7px;border-radius:20px;margin-left:7px;
+background:var(--panel2);color:var(--text);vertical-align:middle}
+.badge.red{background:#48232c;color:#ffb5be}.badge.green{background:#173d30;color:#86f0bd}
+.badge.yellow{background:#463a1a;color:#ffe39a}.badge.blue{background:#202f58;color:#a9c2ff}
+p.note{color:var(--muted);margin:6px 0 12px}
+ul{padding:0;margin:8px 0;list-style:none}
+li.item{display:flex;gap:10px;align-items:flex-start;padding:8px 5px;border-radius:8px}
+li.item:hover{background:#17213a}
+input[type=checkbox]{width:20px;height:20px;accent-color:#6f8fff;flex:none;margin-top:2px}
+.item.done .label{text-decoration:line-through;color:#7885a2}.item.done{opacity:.65}
+.label{flex:1}.small{font-size:12px;color:var(--muted);display:block;margin-top:2px}
+.warning{border-left:4px solid var(--red);background:color-mix(in srgb, var(--red) 12%, var(--panel));padding:11px 13px;border-radius:8px;margin:10px 0}
+.tip{border-left:4px solid var(--green);background:color-mix(in srgb, var(--green) 12%, var(--panel));padding:11px 13px;border-radius:8px;margin:10px 0}
+.priority{border-left:4px solid var(--yellow);background:color-mix(in srgb, var(--yellow) 12%, var(--panel));padding:11px 13px;border-radius:8px;margin:10px 0}
+.phase{border-left:4px solid var(--accent);padding-left:10px}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:30px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.container{padding:10px}}
+
+/* Full white-theme override */
+body.light{
+  background:var(--bg) !important;
+  color:var(--text) !important;
+}
+body.light header{
+  background:rgba(255,255,255,.98) !important;
+  color:var(--text) !important;
+}
+body.light .container,
+body.light .grid,
+body.light .card,
+body.light .progress-wrap{
+  color:var(--text);
+}
+body.light .card,
+body.light .progress-wrap{
+  background:var(--panel) !important;
+  border-color:var(--border) !important;
+}
+body.light .subtitle,
+body.light .note,
+body.light .small,
+body.light footer{
+  color:var(--muted) !important;
+}
+body.light button{
+  background:var(--panel2) !important;
+  color:var(--text) !important;
+  border-color:var(--border) !important;
+}
+body.light li.item:hover{
+  background:var(--panel2) !important;
+}
+body.light .progress{
+  background:#dfe5f0 !important;
+}
+body.light .warning{
+  background:#fff0f2 !important;
+  color:#5a1721 !important;
+}
+body.light .tip{
+  background:#eaf8f1 !important;
+  color:#12432f !important;
+}
+body.light .priority{
+  background:#fff8df !important;
+  color:#4b3900 !important;
+}
+body.light .warning strong,
+body.light .tip strong,
+body.light .priority strong{
+  color:inherit !important;
+}
+
+
+/* Header layout: title follows language direction; controls always occupy a separate row */
+.main-header-row{
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  width:100%;
+}
+.header-title-block{width:100%}
+.header-controls-row{
+  width:100%;
+  display:flex;
+  justify-content:flex-end;
+  margin-top:10px;
+  direction:ltr !important;
+}
+.header-controls{
+  margin-top:0 !important;
+  direction:ltr !important;
+  flex-direction:row !important;
+}
+html[dir="rtl"] .main-header-row{
+  direction:rtl !important;
+  justify-content:flex-end;
+}
+html[dir="rtl"] .header-title-block{
+  text-align:right;
+  direction:rtl;
+}
+html[dir="ltr"] .main-header-row{
+  direction:ltr !important;
+  justify-content:flex-start;
+}
+html[dir="ltr"] .header-title-block{
+  text-align:left;
+  direction:ltr;
+}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="main-header-row">
+    <div class="header-title-block">
+      <h1 data-i18n="title">🎮 AION 2 — General Launch Checklist</h1>
+      <div class="subtitle" data-i18n="subtitle">Main Character + Alts • First-week checklist • Follow priorities • Progress is saved automatically</div>
+    </div>
+  </div>
+  <div class="header-controls-row">
+    <div class="controls header-controls">
+      <button id="langBtn" onclick="toggleLang()">🇬🇧 English</button>
+      <button id="themeBtn" onclick="toggleTheme()">☀️ White Mode</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <strong>Overall Progress</strong>
+      <span id="progressText">0 / 0 completed</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="controls">
+      <button onclick="expandAll()">Expand all</button>
+      <button onclick="collapseAll()">Collapse all</button>
+      <button onclick="resetAll()">Reset checklist</button>
+    </div>
+  </div>
+
+  <div class="card full">
+    <h2>🚨 The Day-1 Rule</h2>
+    <div class="warning">
+      <strong>Do NOT try to min-max everything on Day 1.</strong><br>
+       <strong>all characters → 22 → Main → 45 → 5 Duty Quests → stop.</strong>
+      The first-week plan is different from Early Access because you only have about two days before the assumed Wednesday reset.
+    </div>
+    <div class="tip">
+      <strong>Golden rule:</strong> Main first. If an activity is server-wide/shared, never consume it on an alt before the Main gets it.
+    </div>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>🟢 DAY 1 — Launch Day</h2>
+      <p class="note">Exact order recommended by the plan for the launch.</p>
+
+      <h3 class="phase">Phase 1 — Get ALL characters to Level 22</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>🎮 Main Character → Level 22</strong><span class="small">At Level 22, Odyle Energy unlocks and starts recharging.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>🧑 Alt 1 → Level 22</strong><span class="small">Unlock Odyle Energy recharge on this character too.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>🧑 Alt 2 → Level 22</strong><span class="small">Same goal: reach 22 and start its independent energy recharge.</span></div></li>
+      </ul>
+
+      <div class="tip"><strong>Why 22?</strong> Odyle Energy is independent per character.  getting every character to 22 first so all of them start recharging as early as possible.</div>
+
+      <h3 class="phase">Phase 2 — Main to Level 45</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>🎮 Main Character → Level 45</strong><span class="small">This unlocks Nightmare Dungeons and Duty Quests.</span></div></li>
+      </ul>
+
+      <h3 class="phase">Phase 3 — The 5 Duty Quests</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Complete Duty Quest #1</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Complete Duty Quest #2</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Complete Duty Quest #3</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Complete Duty Quest #4</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Complete Duty Quest #5</strong></div></li>
+      </ul>
+
+      <div class="warning"><strong>Duty Quests are once per server.</strong> Do all 5 on the Main. Do NOT waste them on Alts.</div>
+
+      <h3>🛑 Day 1 Finish Line</h3>
+      <p class="priority"><strong>Once the 5 Duties are done, the plan considers Day 1 complete.</strong> Do not feel pressured to finish all side content or reach 1400 today.</p>
+    </section>
+
+    <section class="card">
+      <h2>🔵 DAY 2 — Day 2</h2>
+      <p class="note">This is the important catch-up day before the assumed Wednesday reset.</p>
+
+      <h3 class="phase">Priority 1 — Do the time-sensitive weeklies</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>🎮 Main — Ascension Trial</strong><span class="small">Highest priority for the short first-week window.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>🎮 Main — Daily Dungeon tickets</strong><span class="small">These weekly tickets reset at the end of the week.</span></div></li>
+      </ul>
+
+      <div class="priority"><strong>Do these before getting lost in side content.</strong> The plan specifically puts Ascension Trial + Daily Dungeons at the top for the short launch window.</div>
+
+      <h3 class="phase">Priority 2 — Weekly resources</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Craft available Odyle Energy — server craft(s)</strong><span class="small">The system provides server-side and per-character Odyle Energy crafts. Only do them if you have the required resources.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Craft available Odyle Energy — Main character craft(s)</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Craft available Odyle Energy — Alt 1 character craft(s)</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Craft available Odyle Energy — Alt 2 character craft(s)</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Subscriber Shop — buy Odyle Energy</strong><span class="small">Only if you have the subscription and the needed currency.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Subscriber Shop — buy Unknown Fisher Challenge tickets</strong><span class="small">These add Daily Dungeon attempts.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Subscriber Shop — buy Soul Crystals</strong><span class="small">Important for Genus progression .</span></div></li>
+      </ul>
+
+      <h3 class="phase">Priority 2 — Main daily</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>🎮 Main — 5 Duty Quests</strong><span class="small">Again: server-wide, so Main only.</span></div></li>
+      </ul>
+
+      <h3 class="phase">Priority 2 — Buy the weekly quest scrolls</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Buy all available PvE weekly quests (up to 12/server)</strong><span class="small">They can stack; buying them is the important part. You do not have to finish all immediately.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Buy all available PvP weekly quests (up to 20/server)</strong><span class="small">Also stackable. Buy before reset; complete later if needed.</span></div></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>🧑‍🤝‍🧑 Alts — Day 2</h2>
+      <p class="note">Only do alt content after the Main's critical content is safe.</p>
+
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Alt 1 — Ascension Trial</strong><span class="small"> Ascension Trial can be done on every character.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Alt 2 — Ascension Trial</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Alt 1 — Battlefield wins (if time)</strong><span class="small">Battlefield victory rewards are per character.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Alt 2 — Battlefield wins (if time)</strong></div></li>
+      </ul>
+
+      <div class="warning"><strong>Do not do Duty Quests on Alts.</strong> They are once per server. The same principle applies to other explicitly server-wide systems.</div>
+
+      <h3>🌙 Nightmare Tickets</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Check Main Nightmare tickets</strong><span class="small">Nightmare unlocks at 45 and recharges per character.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Use available Nightmare attempts if appropriate</strong><span class="small">For a normal full week the plan recommends letting tickets accumulate and getting stronger first. With only two days, don't let useful tickets expire, but prioritize the urgent content first.</span></div></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>🎮 MAIN — 1400 Item Level Push</h2>
+      <p class="note">This is the main progression goal after the urgent Day-2 weekly content.</p>
+
+      <h3 class="phase">Finish Main Progression</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Finish Main Story</strong><span class="small">If anything remains after reaching 45, finish it.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Complete Green / Side Quests</strong><span class="small"> these provide major progression, skill points and gear.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Clear Sealed Dungeons</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Clear Strongholds / Question Marks</strong><span class="small"> completing the relevant question-mark content on the map.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Collect useful Feathers</strong><span class="small">Feathers can be synchronized between characters, so you do not need to repeat the same collection on every alt.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Progress Daevanion Board</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Collect Skill Points / progression rewards</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Equip useful gear upgrades</strong></div></li>
+      </ul>
+
+      <div class="tip"><strong>Target: 1400 Item Level.</strong>  1400 as the requirement for Vakron Sky Island .</div>
+
+      <h3>🏝️ Once Main reaches 1400</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Unlock / enter Vakron Sky Island</strong><span class="small">Main dungeon goal for the first-week progression path.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Use Odyle Energy for valuable dungeon loot</strong><span class="small">Avoid wasting energy on low-value runs; the goal is useful gear progression.</span></div></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>⚔️ Weekly / Event Checklist</h2>
+
+      <h3 class="phase">Battlefield</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Main — Battlefield Victory #1</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Main — Battlefield Victory #2</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Main — Battlefield Victory #3</strong><span class="small">Three victory rewards per week, per character .</span></div></li>
+      </ul>
+
+      <h3 class="phase">Shugo Festival</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Check for Shugo Festival event popup</strong><span class="small">Unlocks at level 13. Two keys recharge daily, max 14. The system is shared across characters, so use the event/reward on Main.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Use Shugo Festival key when worthwhile</strong></div></li>
+      </ul>
+
+      <h3 class="phase">Abyss Corridors</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Check Wednesday/Saturday Artifact Siege outcome</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Run available Abyss Corridor(s)</strong><span class="small">Can be done on Main and Alts. Gives Kina and Abyss Points.</span></div></li>
+      </ul>
+
+      <h3 class="phase">World / Field Bosses — Optional</h3>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Check map for upcoming Field Bosses</strong><span class="small">Do not set alarms just for these. If you're online and one is spawning, participate when convenient.</span></div></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>💰 Supply Requests — Optional Money Check</h2>
+      <p class="note">These are not mandatory just because they exist.</p>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Check Emergency / Daily Supply Requests</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Check Weekly Supply Requests</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Check Seasonal Crafts</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Decide whether selling materials is more profitable than feeding them</strong><span class="small">The plan warns that market prices can make some requests inefficient. You do NOT have to complete every request.</span></div></li>
+      </ul>
+
+      <div class="tip"><strong>Rule:</strong> Before submitting expensive materials, check their market value. Sometimes selling them is better than completing the request.</div>
+    </section>
+
+    <section class="card full">
+      <h2>📋 Systems Reference — Don't Forget These</h2>
+      <div class="grid">
+        <div>
+          <h3>🔋 Odyle Energy</h3>
+          <ul>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Unlocked at Level 22</strong><span class="small">15 every 3 hours; 120/day; storage cap described in the plan as 840.</span></div></li>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Independent per character</strong></div></li>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Use for dungeon loot cubes</strong><span class="small">The plan describes 40 Odyle per normal cube opening; subscription allows an additional opening for 80 total.</span></div></li>
+          </ul>
+        </div>
+        <div>
+          <h3>🎮 Shugo Festival</h3>
+          <ul>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Unlocks at Level 13</strong></div></li>
+            <li class="item"><input type="checkbox"><div class="label"><strong>2 keys/day, max 14</strong></div></li>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Shared across characters — use Main</strong></div></li>
+          </ul>
+        </div>
+        <div>
+          <h3>💀 Nightmare</h3>
+          <ul>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Unlocks at Level 45</strong></div></li>
+            <li class="item"><input type="checkbox"><div class="label"><strong>2 tickets/day, max 14</strong></div></li>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Independent per character</strong></div></li>
+          </ul>
+        </div>
+        <div>
+          <h3>📅 Weekly Reset Strategy</h3>
+          <ul>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Do urgent weekly content before reset</strong></div></li>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Buy weekly shop/quest items before reset</strong></div></li>
+            <li class="item"><input type="checkbox"><div class="label"><strong>Don't waste time trying to finish optional content before critical content</strong></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>🚦 Quick Decision Tree While Playing</h2>
+      <div class="priority">
+        <strong>Where am I in the plan?</strong><br><br>
+        <b>1.</b> Any character below 22? → Get it to 22.<br>
+        <b>2.</b> All 3 at 22 but Main below 45? → Main to 45.<br>
+        <b>3.</b> Main 45 and today's 5 Duties unfinished? → Do Duties.<br>
+        <b>4.</b> Day 1 and Duties done? → You're done with the mandatory launch route. Save yourself for Day 2.<br>
+        <b>5.</b> Day 2 and Ascension/Daily Dungeon unfinished? → Do those first.<br>
+        <b>6.</b> Those done? → Crafts + Shop + Duties + weekly quest purchases.<br>
+        <b>7.</b> Main weekly essentials safe? → Alts' Ascension/Battlefields/Nightmare as appropriate.<br>
+        <b>8.</b> Still have time? → Main side content → push toward 1400.<br>
+        <b>9.</b> Main reaches 1400? → Vakron Sky Island / valuable dungeon progression.
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>🧠 Don't Waste These</h2>
+      <ul>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Don't spend server-wide Duty rewards on an Alt.</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Don't rush optional side content before the Day-2 priority content.</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Don't assume every activity is per-character.</strong><span class="small">Check whether it is server-wide/shared before using it on an Alt.</span></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Don't force Supply Requests when materials are overpriced.</strong></div></li>
+        <li class="item"><input type="checkbox"><div class="label"><strong>Don't panic about 1400 on Day 1.</strong><span class="small"> 22 → 45 → 5 Duties on Day 1.</span></div></li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<footer data-i18n="footer">General AION 2 launch checklist — designed to be shared with any class and party.</footer>
+
+<script>
+const KEY='aion2_oct5_checklist_v1';
+function items(){return [...document.querySelectorAll('input[type=checkbox]')]}
+function update(){
+  const all=items(), done=all.filter(x=>x.checked).length;
+  document.getElementById('progressText').textContent=`${done} / ${all.length} completed`;
+  document.getElementById('bar').style.width=(all.length?done/all.length*100:0)+'%';
+  all.forEach((cb,i)=>{cb.closest('.item').classList.toggle('done',cb.checked)});
+  localStorage.setItem(KEY,JSON.stringify(all.map(x=>x.checked)));
+}
+function load(){
+  try{
+    const s=JSON.parse(localStorage.getItem(KEY)||'[]');
+    items().forEach((x,i)=>x.checked=!!s[i]);
+  }catch(e){}
+  update();
+}
+function resetAll(){
+  if(confirm('Reset the entire checklist?')){items().forEach(x=>x.checked=false);update();}
+}
+function expandAll(){document.querySelectorAll('.card').forEach(c=>c.style.display='block')}
+function collapseAll(){
+  document.querySelectorAll('.card').forEach((c,i)=>{if(i>0)c.style.display='none'});
+}
+document.addEventListener('change',e=>{if(e.target.matches('input[type=checkbox]'))update()});
+load();
+</script>
+
+<script>
+const I18N = {
+  en: {
+    title:"🎮 AION 2 — Launch Day Launch Checklist",
+    subtitle:"Main Character + 2 Alts • Short first week • Follow in order • Saved automatically in this browser",
+    footer:" The checklist preserves the plan's launch plan and terminology.",
+    lang:"🇪🇬 العربية", theme:"☀️ White Mode"
+  },
+  ar: {
+    title:"🎮 AION 2 — Checklist إطلاق يوم الإطلاق",
+    subtitle:"Main Character أساسي + شخصيتين إضافيتين • أسبوع أول قصير • امشِ بالترتيب • الحفظ تلقائي في المتصفح",
+    footer:"تم بناء الـChecklist من نص فيديو AION 2 المرفق، مع الحفاظ على خطة إطلاق يوم الإطلاق والمصطلحات المستخدمة في الفيديو.",
+    lang:"🇬🇧 English", theme:"🌙 Dark Mode"
+  }
+};
+
+const AR_MAP = {
+"🚨 The Day-1 Rule":"🚨 قاعدة اليوم الأول",
+"Do NOT try to min-max everything on Day 1.":"لا تحاول تعمل Min-Max لكل حاجة في اليوم الأول.",
+" all characters → 22 → Main → 45 → 5 Duty Quests → stop.":"خطة يوم الإطلاق في الفيديو: كل الشخصيات → Level 22 → الـMain إلى 45 → 5 Duty Quests → توقف.",
+"The first-week plan is different from Early Access because you only have about two days before the assumed Wednesday reset.":"خطة الأسبوع الأول مختلفة عن Early Access لأن قدامنا تقريبًا يومين قبل الـWeekly Reset المتوقع يوم الأربعاء.",
+"Golden rule:":"القاعدة الذهبية:",
+"Main first. If an activity is server-wide/shared, never consume it on an alt before the Main gets it.":"الـMain أولًا. لو النشاط Server-wide / Shared، ممنوع تستهلكه على Alt قبل ما الـMain ياخده.",
+"🟢 DAY 1 — Launch Day":"🟢 اليوم الأول — يوم الإطلاق",
+"Exact order recommended by the plan for the launch.":"الترتيب المقترح في الفيديو لإطلاق يوم الإطلاق.",
+"Phase 1 — Get ALL characters to Level 22":"المرحلة 1 — كل الشخصيات تصل إلى Level 22",
+"🎮 Main Character → Level 22":"🎮 الـMain Character → Level 22",
+"At Level 22, Odyle Energy unlocks and starts recharging.":"عند Level 22 يتم فتح Odyle Energy وتبدأ في الشحن.",
+"🧑 Alt 1 → Level 22":"🧑 Alt 1 → Level 22",
+"Unlock Odyle Energy recharge on this character too.":"افتح شحن Odyle Energy للشخصية دي أيضًا.",
+"🧑 Alt 2 → Level 22":"🧑 Alt 2 → Level 22",
+"Same goal: reach 22 and start its independent energy recharge.":"نفس الهدف: الوصول إلى 22 وبدء شحن الـEnergy بشكل مستقل.",
+"Why 22?":"ليه Level 22؟",
+"Odyle Energy is independent per character.  getting every character to 22 first so all of them start recharging as early as possible.":"Odyle Energy مستقلة لكل Character. الفيديو ينصح بوصول كل الشخصيات إلى 22 أولًا لكي تبدأ كلها الشحن بأكبر وقت ممكن.",
+"Phase 2 — Main to Level 45":"المرحلة 2 — الـMain إلى Level 45",
+"🎮 Main Character → Level 45":"🎮 الـMain Character → Level 45",
+"This unlocks Nightmare Dungeons and Duty Quests.":"ده يفتح Nightmare Dungeons وDuty Quests.",
+"Phase 3 — The 5 Duty Quests":"المرحلة 3 — الـ5 Duty Quests",
+"Complete Duty Quest #1":"أكمل Duty Quest #1",
+"Complete Duty Quest #2":"أكمل Duty Quest #2",
+"Complete Duty Quest #3":"أكمل Duty Quest #3",
+"Complete Duty Quest #4":"أكمل Duty Quest #4",
+"Complete Duty Quest #5":"أكمل Duty Quest #5",
+"Duty Quests are once per server. Do all 5 on the Main. Do NOT waste them on Alts.":"الـDuty Quests مرة واحدة لكل Server. اعمل الخمسة على الـMain. ممنوع تضيعهم على الـAlts.",
+"🛑 Day 1 Finish Line":"🛑 نهاية اليوم الأول",
+"Once the 5 Duties are done, the plan considers Day 1 complete.":"بمجرد إنهاء الـ5 Duties، الفيديو يعتبر اليوم الأول انتهى.",
+"Do not feel pressured to finish all side content or reach 1400 today.":"مش مطلوب منك تخلص كل الـSide Content أو توصل 1400 في اليوم الأول.",
+"🔵 DAY 2 — Day 2":"🔵 اليوم الثاني — اليوم الثاني",
+"This is the important catch-up day before the assumed Wednesday reset.":"ده يوم اللحاق بالمحتوى المهم قبل الـReset المتوقع يوم الأربعاء.",
+"Priority 1 — Do the time-sensitive weeklies":"الأولوية 1 — خلّص الـWeeklies الحساسة للوقت",
+"🎮 Main — Ascension Trial":"🎮 الـMain — Ascension Trial",
+"Highest priority for the short first-week window.":"أعلى أولوية حسب خطة يوم الإطلاق.",
+"🎮 Main — Daily Dungeon tickets":"🎮 الـMain — تذاكر الـDaily Dungeon",
+"These weekly tickets reset at the end of the week.":"التذاكر الأسبوعية دي بتعمل Reset في نهاية الأسبوع.",
+"Do these before getting lost in side content.":"اعمل دول قبل ما تتوه في الـSide Content.",
+"Priority 2 — Weekly resources":"الأولوية 2 — موارد الأسبوع",
+"Craft available Odyle Energy — server craft(s)":"اعمل Crafts الـOdyle Energy المتاحة — Server",
+"Craft available Odyle Energy — Main character craft(s)":"اعمل Crafts الـOdyle Energy المتاحة — الـMain",
+"Craft available Odyle Energy — Alt 1 character craft(s)":"اعمل Crafts الـOdyle Energy المتاحة — Alt 1",
+"Craft available Odyle Energy — Alt 2 character craft(s)":"اعمل Crafts الـOdyle Energy المتاحة — Alt 2",
+"Subscriber Shop — buy Odyle Energy":"Subscriber Shop — اشترِ Odyle Energy",
+"Only if you have the subscription and the needed currency.":"فقط لو عندك Subscription والعملة المطلوبة.",
+"Subscriber Shop — buy Unknown Fisher Challenge tickets":"Subscriber Shop — اشترِ Unknown Fisher Challenge Tickets",
+"These add Daily Dungeon attempts.":"دي بتضيف محاولات للـDaily Dungeon.",
+"Subscriber Shop — buy Soul Crystals":"Subscriber Shop — اشترِ Soul Crystals",
+"Important for Genus progression .":"مهمة لتطور الـGenus حسب الفيديو.",
+"Priority 2 — Main daily":"الأولوية 2 — الـDaily للـMain",
+"🎮 Main — 5 Duty Quests":"🎮 الـMain — 5 Duty Quests",
+"Again: server-wide, so Main only.":"مرة أخرى: Server-wide، لذلك الـMain فقط.",
+"Priority 2 — Buy the weekly quest scrolls":"الأولوية 2 — شراء الـWeekly Quest Scrolls",
+"Buy all available PvE weekly quests (up to 12/server)":"اشترِ كل PvE Weekly Quests المتاحة (حتى 12 لكل Server)",
+"They can stack; buying them is the important part. You do not have to finish all immediately.":"تقدر تتراكم؛ المهم إنك تشتريها. مش لازم تخلصها كلها فورًا.",
+"Buy all available PvP weekly quests (up to 20/server)":"اشترِ كل PvP Weekly Quests المتاحة (حتى 20 لكل Server)",
+"Also stackable. Buy before reset; complete later if needed.":"تقدر تتراكم أيضًا. اشتريها قبل الـReset واخلصها لاحقًا لو احتجت.",
+"🧑‍🤝‍🧑 Alts — Day 2":"🧑‍🤝‍🧑 الـAlts — اليوم الثاني",
+"Only do alt content after the Main's critical content is safe.":"اعمل محتوى الـAlts فقط بعد ما تضمن المحتوى المهم للـMain.",
+"Alt 1 — Ascension Trial":"Alt 1 — Ascension Trial",
+" Ascension Trial can be done on every character.":"الفيديو يقول إن Ascension Trial يمكن عمله على كل Character.",
+"Alt 2 — Ascension Trial":"Alt 2 — Ascension Trial",
+"Alt 1 — Battlefield wins (if time)":"Alt 1 — Battlefield Wins (لو في وقت)",
+"Battlefield victory rewards are per character.":"مكافآت الفوز في Battlefield لكل Character.",
+"Alt 2 — Battlefield wins (if time)":"Alt 2 — Battlefield Wins (لو في وقت)",
+"Do not do Duty Quests on Alts.":"ممنوع تعمل Duty Quests على الـAlts.",
+"They are once per server. The same principle applies to other explicitly server-wide systems.":"هي مرة واحدة لكل Server. ونفس القاعدة تنطبق على أي System موضح إنه Server-wide.",
+"🌙 Nightmare Tickets":"🌙 Nightmare Tickets",
+"Check Main Nightmare tickets":"راجع Nightmare Tickets بتوع الـMain",
+"Nightmare unlocks at Level 45 and recharges per character.":"Nightmare يفتح عند Level 45 وبيتشحن لكل Character.",
+"Use available Nightmare attempts if appropriate":"استخدم محاولات Nightmare المتاحة لو مناسب",
+"For a normal full week the plan recommends letting tickets accumulate and getting stronger first. With only two days, don't let useful tickets expire, but prioritize the urgent content first.":"في أسبوع كامل، الفيديو ينصح بتجميع التذاكر وتقوية الشخصية أولًا. مع يومين فقط، متسيبش محاولات مفيدة تضيع، لكن خلّي المحتوى العاجل أولًا.",
+"🎮 MAIN — 1400 Item Level Push":"🎮 الـMAIN — الوصول إلى 1400 Item Level",
+"This is the main progression goal after the urgent Day-2 weekly content.":"ده هدف الـProgression الأساسي بعد محتوى Day 2 العاجل.",
+"Finish Main Progression":"إنهاء الـMain Progression",
+"Finish Main Story":"إنهاء الـMain Story",
+"If anything remains after reaching 45, finish it.":"لو لسه فيه حاجة بعد Level 45، خلصها.",
+"Complete Green / Side Quests":"إنهاء الـGreen / Side Quests",
+" these provide major progression, skill points and gear.":"الفيديو يقول إنها بتدي Progression وSkill Points وGear مهمين.",
+"Clear Sealed Dungeons":"إنهاء Sealed Dungeons",
+"Clear Strongholds / Question Marks":"إنهاء Strongholds / Question Marks",
+" completing the relevant question-mark content on the map.":"الفيديو ينصح بإنهاء محتوى الـQuestion Marks المهم على الخريطة.",
+"Collect useful Feathers":"جمع الـFeathers المهمة",
+"Feathers can be synchronized between characters, so you do not need to repeat the same collection on every alt.":"الـFeathers يمكن مزامنتها بين الشخصيات، لذلك مش لازم تكرر نفس التجميع على كل Alt.",
+"Progress Daevanion Board":"تطوير Daevanion Board",
+"Collect Skill Points / progression rewards":"جمع Skill Points / Progression Rewards",
+"Equip useful gear upgrades":"تركيب ترقيات الـGear المفيدة",
+"Target: 1400 Item Level.":"الهدف: 1400 Item Level.",
+" 1400 as the requirement for Vakron Sky Island .":"الفيديو يعتبر 1400 هو متطلب دخول Vakron Sky Island في الـVersion المذكور.",
+"Once Main reaches 1400":"بعد ما الـMain يوصل 1400",
+"Unlock / enter Vakron Sky Island":"فتح / دخول Vakron Sky Island",
+"Main dungeon goal for the first-week progression path.":"هدف الـDungeon الأساسي في مسار الـProgression للأسبوع الأول.",
+"Use Odyle Energy for valuable dungeon loot":"استخدم Odyle Energy على Loot الدنجنز المفيد",
+"Avoid wasting energy on low-value runs; the goal is useful gear progression.":"متضيعش الـEnergy على Runs ضعيفة القيمة؛ الهدف Gear Progression مفيد.",
+"⚔️ Weekly / Event Checklist":"⚔️ قائمة الـWeekly / Events",
+"Battlefield":"Battlefield",
+"Main — Battlefield Victory #1":"الـMain — Battlefield Victory #1",
+"Main — Battlefield Victory #2":"الـMain — Battlefield Victory #2",
+"Main — Battlefield Victory #3":"الـMain — Battlefield Victory #3",
+"Three victory rewards per week, per character .":"3 مكافآت فوز أسبوعيًا لكل Character حسب الفيديو.",
+"🎮 Shugo Festival":"🎮 Shugo Festival",
+"Check for Shugo Festival event popup":"راجع ظهور Shugo Festival Event Popup",
+"Unlocks at level 13. Two keys recharge daily, max 14. The system is shared across characters, so use the event/reward on Main.":"يفتح عند Level 13. مفتاحان يوميًا، والحد الأقصى 14. الـSystem مشترك بين الشخصيات، لذلك استخدمه على الـMain.",
+"Use Shugo Festival key when worthwhile":"استخدم Shugo Festival Key لما يكون مفيد",
+"Abyss Corridors":"Abyss Corridors",
+"Check Wednesday/Saturday Artifact Siege outcome":"راجع نتيجة Artifact Siege يوم الأربعاء/السبت",
+"Run available Abyss Corridor(s)":"اعمل الـAbyss Corridor(s) المتاحة",
+"Can be done on Main and Alts. Gives Kina and Abyss Points.":"يمكن عملها على الـMain والـAlts. بتدي Kina وAbyss Points.",
+"World / Field Bosses — Optional":"World / Field Bosses — اختياري",
+"Check map for upcoming Field Bosses":"راجع الخريطة للـField Bosses القادمة",
+"Do not set alarms just for these. If you're online and one is spawning, participate when convenient.":"مش محتاج تعمل Alarms مخصوص. لو أنت Online والـBoss هيظهر، شارك لو الوقت مناسب.",
+"💰 Supply Requests — Optional Money Check":"💰 Supply Requests — مراجعة اختيارية للربح",
+"These are not mandatory just because they exist.":"مش لازم تعملها لمجرد إنها موجودة.",
+"Check Emergency / Daily Supply Requests":"راجع Emergency / Daily Supply Requests",
+"Check Weekly Supply Requests":"راجع Weekly Supply Requests",
+"Check Seasonal Crafts":"راجع Seasonal Crafts",
+"Decide whether selling materials is more profitable than feeding them":"قرر هل بيع الـMaterials أربح من استخدامها في الـRequest",
+"Rule:":"القاعدة:",
+"Before submitting expensive materials, check their market value. Sometimes selling them is better than completing the request.":"قبل ما تسلم Materials غالية، راجع سعرها في الـMarket. أحيانًا بيعها يكون أفضل من إكمال الـRequest.",
+"📋 Systems Reference — Don't Forget These":"📋 مرجع الـSystems — متنساش دول",
+"🔋 Odyle Energy":"🔋 Odyle Energy",
+"Unlocked at Level 22":"تفتح عند Level 22",
+"Independent per character":"مستقلة لكل Character",
+"Use for dungeon loot cubes":"تُستخدم لفتح Loot Cubes الخاصة بالدنجنز",
+"🎮 Shugo Festival":"🎮 Shugo Festival",
+"2 keys/day, max 14":"مفتاحان/اليوم، الحد الأقصى 14",
+"Shared across characters — use Main":"مشتركة بين الشخصيات — استخدم الـMain",
+"💀 Nightmare":"💀 Nightmare",
+"Unlocks at Level 45":"يفتح عند Level 45",
+"2 tickets/day, max 14":"تذكرتان/اليوم، الحد الأقصى 14",
+"Independent per character":"مستقلة لكل Character",
+"📅 Weekly Reset Strategy":"📅 استراتيجية الـWeekly Reset",
+"Do urgent weekly content before reset":"اعمل الـWeekly Content العاجل قبل الـReset",
+"Buy weekly shop/quest items before reset":"اشترِ عناصر الـWeekly Shop/Quests قبل الـReset",
+"Don't waste time trying to finish optional content before critical content":"متضيعش وقتك في Optional Content قبل الـCritical Content",
+"🚦 Quick Decision Tree While Playing":"🚦 Decision Tree سريع أثناء اللعب",
+"Where am I in the plan?":"أنا فين في الخطة؟",
+"Any character below 22?":"أي Character أقل من 22؟",
+"Get it to 22.":"وصّله إلى 22.",
+"All 3 at 22 but Main below 45?":"الثلاثة 22 لكن الـMain أقل من 45؟",
+"Main to 45.":"ارفع الـMain إلى 45.",
+"Main 45 and today's 5 Duties unfinished?":"الـMain 45 ولسه الـ5 Duties مخلصوش؟",
+"Do Duties.":"اعمل الـDuties.",
+"Day 1 and Duties done?":"اليوم الأول والـDuties خلصت؟",
+"You're done with the mandatory launch route. Save yourself for Day 2.":"أنت خلصت مسار الإطلاق الإجباري. وفر وقتك لليوم الثاني.",
+"Day 2 and Ascension/Daily Dungeon unfinished?":"اليوم الثاني ولسه Ascension/Daily Dungeon مخلصوش؟",
+"Do those first.":"اعمل دول أولًا.",
+"Those done?":"خلصوا؟",
+"Crafts + Shop + Duties + weekly quest purchases.":"Crafts + Shop + Duties + شراء الـWeekly Quests.",
+"Main weekly essentials safe?":"هل الـMain خلص المحتوى الأسبوعي الأساسي؟",
+"Alts' Ascension/Battlefields/Nightmare as appropriate.":"اعمل Ascension/Battlefields/Nightmare للـAlts حسب الوقت.",
+"Still have time?":"لسه فيه وقت؟",
+"Main side content → push toward 1400.":"Main Side Content → ادفع ناحية 1400.",
+"Main reaches 1400?":"الـMain وصل 1400؟",
+"Vakron Sky Island / valuable dungeon progression.":"Vakron Sky Island / Dungeon Progression المفيد.",
+"🧠 Don't Waste These":"🧠 حاجات متضيعهاش",
+"Don't spend server-wide Duty rewards on an Alt.":"متصرفش Server-wide Duty Rewards على Alt.",
+"Don't rush optional side content before the Day-2 priority content.":"متستعجلش الـOptional Side Content قبل أولويات Day 2.",
+"Don't assume every activity is per-character.":"متفترضش إن كل Activity لكل Character.",
+"Don't force Supply Requests when materials are overpriced.":"متجبرش نفسك على Supply Requests لما الـMaterials تكون غالية.",
+"Don't panic about 1400 on Day 1.":"متقلقش من 1400 في Day 1.",
+" 22 → 45 → 5 Duties on Day 1.":"خطة يوم الإطلاق بتحدد بوضوح 22 → 45 → 5 Duties كأولوية Day 1.",
+"Expand all":"فتح الكل","Collapse all":"قفل الكل","Reset checklist":"إعادة ضبط القائمة"
+};
+
+function translatePage(lang){
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.dataset.i18n;
+    if(I18N[lang][key]) el.textContent=I18N[lang][key];
+  });
+  if(lang==='ar'){
+    document.querySelectorAll('body *').forEach(el=>{
+      if(el.children.length===0 && el.childNodes.length===1){
+        const t=el.textContent.trim();
+        if(AR_MAP[t]) el.textContent=AR_MAP[t];
+      }
+    });
+    document.getElementById('langBtn').textContent=I18N.ar.lang;
+    document.getElementById('themeBtn').textContent=document.body.classList.contains('light')?'🌙 Dark Mode':'🌙 Dark Mode';
+  } else {
+    // Reload is the cleanest way to restore all original English text.
+    document.getElementById('langBtn').textContent=I18N.en.lang;
+    document.getElementById('themeBtn').textContent=document.body.classList.contains('light')?'🌙 Dark Mode':'☀️ White Mode';
+    if(window._translatedToArabic) location.reload();
+  }
+  window._translatedToArabic = lang==='ar';
+  localStorage.setItem('aion2_lang',lang);
+}
+function toggleLang(){
+  const current=localStorage.getItem('aion2_lang')||'en';
+  translatePage(current==='en'?'ar':'en');
+}
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  const light=document.body.classList.contains('light');
+  localStorage.setItem('aion2_theme',light?'light':'dark');
+  document.getElementById('themeBtn').textContent=light?'🌙 Dark Mode':'☀️ White Mode';
+}
+(function(){
+  const theme=localStorage.getItem('aion2_theme');
+  if(theme==='light') document.body.classList.add('light');
+  document.getElementById('themeBtn').textContent=document.body.classList.contains('light')?'🌙 Dark Mode':'☀️ White Mode';
+  const lang=localStorage.getItem('aion2_lang')||'ar';
+  if(lang==='ar') translatePage('ar');
+})();
+</script>
+
+</body>
+</html>
